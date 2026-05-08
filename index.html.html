@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>🕯️ KUNJAAH | you are not alone 🕯️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fff0f5 0%, #ffe4ef 40%, #ffd6e4 100%);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .floating-love {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.3rem;
+            opacity: 0;
+            z-index: 0;
+            animation: floatLove 22s linear infinite;
+            filter: drop-shadow(0 0 4px #ffb7cc);
+        }
+        @keyframes floatLove {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.5; }
+            85% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+        .music-premium {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(255,250,252,0.96);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 100;
+            border: 1px solid #ffbfd0;
+            color: #d46b82;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.4s ease;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(255,100,130,0.15);
+        }
+        .music-premium.visible { opacity: 1; transform: translateX(0); }
+        .screen-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,242,248,0.96);
+            backdrop-filter: blur(42px);
+            z-index: 1100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.7s ease;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(32px);
+            border-radius: 96px;
+            padding: 2.8rem 2rem;
+            width: 92%;
+            max-width: 680px;
+            text-align: center;
+            border: 1px solid #ffd0de;
+            box-shadow: 0 40px 70px rgba(255,100,130,0.12);
+            animation: fadeScale 0.6s ease;
+        }
+        @keyframes fadeScale { from { opacity:0; transform: scale(0.96); } to { opacity:1; transform: scale(1); } }
+        .btn-rose {
+            background: linear-gradient(125deg, #ff9bb5, #f57392);
+            border: none;
+            padding: 15px 42px;
+            border-radius: 120px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(255,100,130,0.3);
+        }
+        .btn-rose:active { transform: scale(0.97); }
+        
+        /* FINGERPRINT LOCKER - LARGER IMAGE */
+        .locker-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+            background: #fffefd;
+            border-radius: 88px;
+            padding: 2.5rem;
+            max-width: 950px;
+            width: 94%;
+            border: 1px solid #ffd5e2;
+            animation: fadeScale 0.5s ease;
+            box-shadow: 0 25px 45px rgba(255,130,150,0.12);
+        }
+        .locker-image {
+            width: 260px;
+            height: 260px;
+            border-radius: 60px;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 20px 35px #ffc0cf;
+            transition: transform 0.3s ease;
+        }
+        .locker-image:hover { transform: scale(1.02); }
+        .fingerprint-circle {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(145deg, #ffeef4, #ffe0ea);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            cursor: pointer;
+            border: 2px solid #ffbfd0;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255,100,130,0.2);
+        }
+        .fingerprint-circle i { font-size: 5rem; color: #d46b82; }
+        .fingerprint-circle.scanning { animation: fingerprintGlow 0.8s ease-in-out infinite; }
+        @keyframes fingerprintGlow {
+            0% { box-shadow: 0 0 0 0 rgba(255,100,130,0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 0 20px rgba(255,100,130,0); transform: scale(1.02); }
+            100% { box-shadow: 0 0 0 0 rgba(255,100,130,0); transform: scale(1); }
+        }
+        .pin-display-finger {
+            background: #fff2f7;
+            border-radius: 80px;
+            padding: 12px;
+            width: 200px;
+            margin: 15px auto;
+            letter-spacing: 8px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #c45a74;
+            border: 1px solid #ffe0e8;
+        }
+        
+        /* MAIN INTERFACE - SQUARE GLOWING DAY COUNTER */
+        .main-sanctuary {
+            display: none;
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 2rem 2rem 2.8rem;
+            background: rgba(255,252,254,0.92);
+            backdrop-filter: blur(34px);
+            border-radius: 110px;
+            border: 1px solid #ffdce8;
+            box-shadow: 0 40px 70px rgba(255,120,140,0.1);
+            animation: slideUp 0.8s ease;
+        }
+        @keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+        
+        /* PREMIUM SQUARE GLOWING COUNTER */
+        .counter-glow-square {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,240,245,0.95));
+            border-radius: 48px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 2px solid rgba(255,200,215,0.9);
+            box-shadow: 0 0 30px rgba(255,120,150,0.3), 0 10px 30px rgba(255,100,130,0.2);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        .counter-glow-square:hover {
+            box-shadow: 0 0 45px rgba(255,120,150,0.5), 0 15px 40px rgba(255,100,130,0.3);
+        }
+        .days-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e06d88, #bc5c74, #f09aae);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255,150,180,0.5);
+        }
+        .clock-love {
+            font-family: monospace;
+            font-size: 0.9rem;
+            background: rgba(255,238,244,0.9);
+            padding: 6px 18px;
+            border-radius: 60px;
+            display: inline-block;
+            margin-top: 10px;
+            color: #bc6f85;
+            font-weight: 500;
+        }
+        
+        .btn-cute {
+            background: rgba(255,255,248,0.98);
+            border: 1px solid #ffbfcf;
+            padding: 18px 26px;
+            border-radius: 130px;
+            font-weight: 700;
+            color: #bc6180;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: 0.25s;
+            font-size: 0.96rem;
+        }
+        .btn-cute:hover { transform: translateY(-3px); background: white; border-color: #ffafc2; box-shadow: 0 10px 20px rgba(255,100,130,0.2); }
+        
+        /* MODAL STYLES */
+        .modal-lavish {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,235,243,0.96);
+            backdrop-filter: blur(48px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s ease;
+        }
+        .modal-lavish.active { visibility: visible; opacity: 1; }
+        .modal-inner {
+            background: #fffdfb;
+            border-radius: 80px;
+            max-width: 92%;
+            width: 880px;
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 2.2rem 2rem;
+            border: 1px solid #ffd1df;
+            box-shadow: 0 50px 90px #ffb7c850;
+        }
+        .modal-inner h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            font-style: italic;
+            background: linear-gradient(125deg, #cd6a83, #ea8aa3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .text-readable {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: #3d2c32;
+            background: #fffafc;
+            padding: 1.8rem;
+            border-radius: 60px;
+            white-space: pre-wrap;
+        }
+        .audio-player { background: #ffeef4; border-radius: 80px; padding: 1rem; margin: 1rem 0; text-align: center; }
+        .memory-img { max-width: 260px; width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 44px; border: 4px solid #ffc4d4; margin: 0.8rem auto; display: block; }
+        .video-wrap { border-radius: 52px; overflow: hidden; margin: 1rem 0; background: #000; }
+        .video-wrap video { width: 100%; max-height: 400px; object-fit: contain; }
+        .video-caption { text-align: center; font-size: 1rem; margin-top: 12px; margin-bottom: 16px; color: #bc6f85; font-weight: 600; background: #fff0f5; padding: 10px; border-radius: 50px; }
+        .close-cute { background: #ff8eab; border: none; padding: 12px 40px; border-radius: 80px; color: white; font-weight: bold; margin-top: 1.5rem; cursor: pointer; }
+        
+        @media (max-width: 620px) {
+            .locker-container { flex-direction: column; }
+            .days-number { font-size: 2rem; }
+            .btn-cute { padding: 14px 18px; font-size: 0.85rem; }
+            .locker-image { width: 180px; height: 180px; }
+            .fingerprint-circle { width: 110px; height: 110px; }
+            .fingerprint-circle i { font-size: 3.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="musicWidget" class="music-premium">
+    <i class="fas fa-heart"></i> <span id="musicStatusText">playing</span> <i class="fas fa-headphones"></i>
+</div>
+
+<!-- ENTRY SCREEN -->
+<div id="entryScreen" class="screen-layer">
+    <div class="glass-card">
+        <i class="fas fa-heartbeat" style="font-size: 3rem; color:#f37f9e;"></i>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin: 0.8rem 0; color:#bf5b77;">🕯️ kunjaah, i'm here 🕯️</h2>
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; margin: 1rem 0; color:#6f4354; line-height:1.6;">
+            i made this when i was feeling heavy. not because everything is okay — because it's not. and that's real. i know your body is fighting. i know you're tired in ways sleep can't fix. i know some days even opening your eyes feels like a battle. and kunjaah, that's okay. you don't have to pretend. you don't have to be strong. you just have to breathe. one breath. then another. that's all i ask.<br><br>
+            this is not a happy website. this is a "i'm here with you in the heavy" website. i'm not going to tell you to look at the bright side. i'm not going to say "it could be worse". i'm just going to sit with you in this. in the silence. in the tears. in the exhaustion. read this when you can't sleep. when the hospital room feels too cold. when the reports make you want to give up. when you feel completely, utterly alone.<br><br>
+            you are not alone. i am holding your hand through every single word on this screen. every letter. every space. every heartbeat of code. it's all for you. 🕯️🤍
+        </div>
+        <button id="goToPassBtn" class="btn-rose">🕯️ enter when you're ready 🕯️</button>
+    </div>
+</div>
+
+<!-- FINGERPRINT PASSWORD SCREEN - NEW LARGER IMAGE URL -->
+<div id="passScreen" class="screen-layer" style="display: none;">
+    <div class="locker-container">
+        <div style="text-align:center">
+            <img src="https://i.ibb.co/kpGV5pH/download.jpg" alt="kunjaah" class="locker-image" onerror="this.src='https://i.pinimg.com/564x/9e/3b/5a/9e3b5a2c4d6e8f0a1b2c3d4e5f6a7b8c.jpg'">
+            <p style="margin-top:8px; font-size:0.7rem;">🕯️ our safe place 🕯️</p>
+        </div>
+        <div style="text-align:center;">
+            <div class="fingerprint-circle" id="fingerprintBtn"><i class="fas fa-fingerprint"></i></div>
+            <div class="pin-display-finger" id="pinDisplayFinger">____</div>
+            <div class="fingerprint-text" style="font-family:'Cormorant Garamond';">place your finger to unlock<br>📌 code: 26 (december 26)</div>
+            <div id="fingerErrorMsg" style="color:#df6e88; font-size:0.7rem; margin-top:8px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- PRE-MAIN MODAL -->
+<div id="preMainModal" class="modal-lavish">
+    <div class="modal-inner">
+        <i class="fas fa-hand-holding-heart" style="font-size:2.5rem; color:#ff8aaa; display:block; text-align:center;"></i>
+        <h3 style="text-align:center;">kunjaah, before you go in 🫂</h3>
+        <div class="text-readable">
+            i know you're not okay. i know your body is tired. i know the reports are scary and the numbers feel like mountains. but kunjaah, listen to me carefully — you are not alone in this mountain. you have never been alone. i am right here. even when i'm not physically there, my heart is in this room with you.<br><br>
+            this website has no happy poems. no fake motivation. no "everything happens for a reason". just me. just my raw, honest, sometimes broken words. just my hand reaching for yours through this screen. read what you can. skip what's too heavy today. cry if you need to — let it all out. sit in silence if that's all your body allows. there is no pressure here. no expectations. just love. just presence. just the quiet truth that i am not going anywhere.<br><br>
+            you don't have to fight alone anymore. you never did. i've got you. always. 🤍🕯️
+        </div>
+        <button id="enterMainFinal" class="btn-rose" style="margin-top:1rem;">🕯️ let's sit together 🕯️</button>
+    </div>
+</div>
+
+<!-- MAIN INTERFACE -->
+<div id="mainApp" class="main-sanctuary">
+    <div class="counter-glow-square">
+        <div style="font-size:0.75rem; font-weight:600; color:#c47a8a; letter-spacing:2px;">🕯️ SINCE DECEMBER 26, 2025 — THE DAY WE PROMISED TO STAY 🕯️</div>
+        <div class="days-number" id="dayCounterDisplay">holding on for —— days</div>
+        <div class="clock-love" id="liveClockDisplay">——:——:——</div>
+    </div>
+    
+    <div id="mainQuote" style="text-align:center; font-family: 'Cormorant Garamond'; font-size:1.05rem; font-style:italic; margin-bottom:1.2rem; color:#aa6f82;"></div>
+    
+    <div style="display:flex; flex-direction:column; gap:0.9rem;">
+        <button id="btnNightTalks" class="btn-cute"><i class="fas fa-moon"></i> 🌙 when sleep won't come (3am thoughts)</button>
+        <button id="btnCommitDay" class="btn-cute"><i class="fas fa-calendar-heart"></i> 📅 dec 26 — we promised to stay</button>
+        <button id="btnBrokenHeart" class="btn-cute"><i class="fas fa-heart-broken"></i> 🕯️ a letter from my broken heart (for your tired soul)</button>
+        <button id="btnMelodyLove" class="btn-cute"><i class="fas fa-headphones"></i> 🎵 a song for heavy hearts</button>
+        <button id="btnLetterTired" class="btn-cute"><i class="fas fa-bed"></i> 💤 for when your body gives up</button>
+        <button id="btnSadDays" class="btn-cute"><i class="fas fa-cloud-showers-heavy"></i> 🌧️ when the darkness is loud</button>
+        <button id="btnSevenMinutes" class="btn-cute"><i class="fas fa-hourglass-end"></i> ⏳ my last 7 minutes — only you</button>
+        <button id="btnPromiseEternal" class="btn-cute"><i class="fas fa-handshake"></i> 🤝 i'm not leaving. i promise.</button>
+    </div>
+    <div style="text-align:center; font-size:0.7rem; margin-top:2rem;">🤍 i'm not leaving. not now. not ever. no matter what. 🤍</div>
+</div>
+
+<script>
+    const MUSIC_URL = "https://golden-dr4gon.github.io/udaariyaan/Udaarian%20(Lyrics)%20-%20Satinder%20Sartaaj%20(Ukulele%20Cover).mp3";
+    let bgAudio = null;
+    let isMediaPlaying = false;
+
+    function initMusic() {
+        if(bgAudio) return;
+        bgAudio = new Audio(MUSIC_URL);
+        bgAudio.loop = true;
+        bgAudio.volume = 0.28;
+        bgAudio.play().catch(e=>console.log("Autoplay blocked"));
+        const widget = document.getElementById('musicWidget');
+        widget.classList.add('visible');
+        widget.onclick = () => {
+            if(bgAudio.paused) { bgAudio.play(); document.getElementById('musicStatusText').innerText = "playing"; }
+            else { bgAudio.pause(); document.getElementById('musicStatusText').innerText = "paused"; }
+        };
+    }
+    function pauseBg() { if(bgAudio && !bgAudio.paused) { bgAudio.pause(); document.getElementById('musicStatusText').innerText = "paused"; } }
+    function resumeBg() { if(bgAudio && bgAudio.paused && !isMediaPlaying) { bgAudio.play(); document.getElementById('musicStatusText').innerText = "playing"; } }
+
+    function setupMediaHandler(mediaElement) {
+        if(!mediaElement) return;
+        const playHandler = () => { isMediaPlaying = true; pauseBg(); };
+        const pauseHandler = () => { isMediaPlaying = false; resumeBg(); };
+        mediaElement.addEventListener('play', playHandler);
+        mediaElement.addEventListener('pause', pauseHandler);
+        mediaElement.addEventListener('ended', pauseHandler);
+        return () => {
+            mediaElement.removeEventListener('play', playHandler);
+            mediaElement.removeEventListener('pause', pauseHandler);
+            mediaElement.removeEventListener('ended', pauseHandler);
+        };
+    }
+
+    // FINGERPRINT UNLOCK
+    let fingerprintAttempt = "";
+    const correctFingerCode = "26";
+    const pinDisplaySpan = document.getElementById('pinDisplayFinger');
+    const errorSpan = document.getElementById('fingerErrorMsg');
+    const fingerprintBtn = document.getElementById('fingerprintBtn');
+    
+    function updatePinDisplay() {
+        let show = fingerprintAttempt.padEnd(4, '_').slice(0,4);
+        if(pinDisplaySpan) pinDisplaySpan.innerText = show;
+    }
+    
+    function resetFingerprintAnimation() { fingerprintBtn.classList.remove('scanning'); }
+    
+    fingerprintBtn.addEventListener('click', () => {
+        fingerprintBtn.classList.add('scanning');
+        setTimeout(() => {
+            let simulatedCode = "26";
+            fingerprintAttempt = "";
+            updatePinDisplay();
+            let i = 0;
+            let interval = setInterval(() => {
+                if(i < simulatedCode.length) {
+                    fingerprintAttempt += simulatedCode[i];
+                    updatePinDisplay();
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    if(fingerprintAttempt === correctFingerCode) {
+                        setTimeout(() => {
+                            document.getElementById('passScreen').style.display = 'none';
+                            document.getElementById('preMainModal').classList.add('active');
+                            resetFingerprintAnimation();
+                        }, 200);
+                    } else {
+                        errorSpan.innerText = "❄️ try again ❄️";
+                        fingerprintAttempt = "";
+                        updatePinDisplay();
+                        resetFingerprintAnimation();
+                    }
+                }
+            }, 200);
+        }, 500);
+    });
+    
+    document.getElementById('goToPassBtn').addEventListener('click', () => {
+        document.getElementById('entryScreen').style.display = 'none';
+        document.getElementById('passScreen').style.display = 'flex';
+        fingerprintAttempt = "";
+        updatePinDisplay();
+        errorSpan.innerText = "";
+    });
+    
+    document.getElementById('enterMainFinal').addEventListener('click', () => {
+        document.getElementById('preMainModal').classList.remove('active');
+        document.getElementById('mainApp').style.display = 'block';
+        startCounters();
+        initMusic();
+        createFloatingLove();
+        startTypingAnimationOnQuote();
+    });
+
+    const START_DATE = new Date(2025, 11, 26, 0, 0, 0);
+    function updateCounters() {
+        const now = new Date();
+        const diffDays = Math.floor((now - START_DATE) / (1000*60*60*24));
+        const dayElem = document.getElementById('dayCounterDisplay');
+        if(dayElem) dayElem.innerHTML = diffDays >= 0 ? `🕯️ ${diffDays} days of holding on together 🕯️` : `✨ ${Math.abs(diffDays)} days until our forever ✨`;
+        const clockElem = document.getElementById('liveClockDisplay');
+        if(clockElem) clockElem.innerText = now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit', second:'2-digit' }) + " 🕯️";
+    }
+    let clockInterval;
+    function startCounters() { updateCounters(); if(clockInterval) clearInterval(clockInterval); clockInterval = setInterval(updateCounters, 1000); }
+    
+    function createFloatingLove() {
+        const icons = ['🕯️', '🤍', '🫂', '💗', '🌙', '✨', '🕊️', '💕', '🌸', '🌷'];
+        for(let i=0;i<100;i++) {
+            let item = document.createElement('div');
+            item.classList.add('floating-love');
+            item.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+            item.style.left = Math.random() * 100 + '%';
+            item.style.fontSize = (Math.random() * 24 + 12) + 'px';
+            item.style.animationDelay = Math.random() * 22 + 's';
+            item.style.animationDuration = (Math.random() * 20 + 14) + 's';
+            document.body.appendChild(item);
+        }
+    }
+
+    function startTypingAnimationOnQuote() {
+        const quoteElement = document.getElementById('mainQuote');
+        const fullText = "“kunjaah, you don't have to be strong right now. just breathe. i'm here. and i'm not leaving.” 🕯️";
+        quoteElement.innerHTML = "";
+        let index = 0;
+        function typeWriter() {
+            if(index < fullText.length) {
+                quoteElement.innerHTML += fullText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 45);
+            }
+        }
+        typeWriter();
+    }
+
+    function createModal(title, htmlContent, mediaType = "none", mediaUrl = "") {
+        const modalDiv = document.createElement('div');
+        modalDiv.className = 'modal-lavish';
+        let mediaHtml = '';
+        if (mediaType === "audio") {
+            mediaHtml = `<div class="audio-player"><audio id="modalAudio" controls preload="metadata" style="width:100%"><source src="${mediaUrl}" type="audio/mpeg"></audio><div style="margin-top:8px; font-size:0.8rem;">🎧 put on headphones, close your eyes, and just breathe</div></div>`;
+        } else if (mediaType === "video") {
+            mediaHtml = `<div class="video-wrap"><video id="modalVideo" controls preload="metadata" playsinline style="width:100%"><source src="${mediaUrl}" type="video/mp4"></video></div><div class="video-caption"><i class="fas fa-heart" style="color:#ff6b8f;"></i> kunjaah, i love you. these 7 minutes are yours. every second. every frame. i love you. 🕯️</div>`;
+        }
+        modalDiv.innerHTML = `<div class="modal-inner"><h3>${title}</h3><div class="text-readable">${htmlContent}${mediaHtml}</div><button class="close-cute">close 🕯️</button></div>`;
+        document.body.appendChild(modalDiv);
+        
+        let cleanup = null;
+        if (mediaType === "audio") {
+            setTimeout(() => { const audioElem = document.getElementById('modalAudio'); if(audioElem) cleanup = setupMediaHandler(audioElem); }, 100);
+        } else if (mediaType === "video") {
+            setTimeout(() => { const videoElem = document.getElementById('modalVideo'); if(videoElem) cleanup = setupMediaHandler(videoElem); }, 100);
+        }
+
+        modalDiv.querySelector('.close-cute').addEventListener('click', () => {
+            modalDiv.classList.remove('active');
+            if (mediaType === "audio") { const audioElem = document.getElementById('modalAudio'); if(audioElem && !audioElem.paused) { audioElem.pause(); isMediaPlaying = false; resumeBg(); } }
+            else if (mediaType === "video") { const videoElem = document.getElementById('modalVideo'); if(videoElem && !videoElem.paused) { videoElem.pause(); isMediaPlaying = false; resumeBg(); } }
+            if(cleanup) cleanup();
+        });
+        modalDiv.addEventListener('click', (e) => { 
+            if(e.target === modalDiv) {
+                modalDiv.classList.remove('active');
+                if (mediaType === "audio") { const audioElem = document.getElementById('modalAudio'); if(audioElem && !audioElem.paused) { audioElem.pause(); isMediaPlaying = false; resumeBg(); } }
+                else if (mediaType === "video") { const videoElem = document.getElementById('modalVideo'); if(videoElem && !videoElem.paused) { videoElem.pause(); isMediaPlaying = false; resumeBg(); } }
+                if(cleanup) cleanup();
+            }
+        });
+        return modalDiv;
+    }
+
+    // BROKEN HEART LETTER - MY OWN ORIGINAL CONTENT
+    const brokenHeartText = `🕯️ KUNJAAH, I'M WRITING THIS WITH TEARS ON MY KEYBOARD...
+
+i don't even know where to start. my heart feels heavy — not because of anything you did, but because i can feel your pain through the distance. i can feel it in my chest like it's my own. and that's the thing about loving you, kunjaah — your pain becomes my pain. not because i want to suffer, but because i love you so much that your struggles echo inside me.
+
+i know you're tired. i know your body feels like it's failing you. i know the creatinine number sits in your mind like a dark cloud that won't go away. and i can't fix it. i can't take the pain away. i can't be there to hold your hand during the bad days. and that breaks me. it breaks me in ways i can't even describe.
+
+but kunjaah, listen to me — even though i'm broken too, even though i'm not okay either, i am here. i am not going anywhere. you don't have to pretend to be strong for me. you don't have to hide your tears. you don't have to say "i'm fine" when you're drowning inside. let me see you. all of you. even the broken parts. especially the broken parts.
+
+some nights i lie awake wondering if you're in pain. wondering if you're crying alone. wondering if you've given up hope. and those thoughts crush me. but then i remember something — you're still here. you're still fighting. even when your body screams at you to stop, you're still here. and that, kunjaah, that is the most beautiful, bravest thing i have ever seen.
+
+i wish i could take your pain and put it into my own body. i wish i could carry your exhaustion for you. i wish i could be there at 3am when you can't sleep and just hold you. but since i can't, i write this. i pour my broken heart into these words. and i hope — i really, really hope — that you can feel me. through the screen. through the distance. through all the chaos of this world.
+
+you are not alone. you have never been alone. and even on the days when you feel like giving up, please remember that i am holding on for you. i am holding on with everything i have. because you are worth it. you are worth every tear. every sleepless night. every heavy breath.
+
+i love you, kunjaah. not because you're perfect. but because you're you. and that's enough. that's always been enough. always. 🕯️🤍`;
+
+    const nightText = `🕯️ KUNJAAH, WHEN SLEEP WON'T COME AT 3AM... i know those nights. the room is dark but your mind is louder than any light. you can text me at 3am. you can call me and say nothing. i will stay. you are not defined by a number on a paper. you are kunjaah. and you are enough. 🕯️`;
+
+    const commitText = `<div style="text-align:center"><img class="memory-img" src="https://i.ibb.co/JFmVzT95/ebfddb23-793f-427a-a63c-01b18ea858f4.jpg" alt="dec26"></div><p><strong>🕯️ DECEMBER 26, 2025 — THE DAY WE SAID "WE STAY" 🕯️</strong><br>that promise still stands. i'm not going anywhere. rest without guilt. i'll be here.</p>`;
+
+    const melodyText = `🎶 PRESS PLAY. close your eyes. let the music hold you. just breathe. i'm here. 🕯️`;
+
+    const letterTiredText = `💌 KUNJAAH, for when your body gives up... you don't have to be strong every hour. sometimes surviving is just lying still and breathing. that's enough. i love you even like this. especially like this. 🕯️`;
+
+    const sadDaysText = `🌧️ when the darkness is loud... you are not a burden. your sickness is not your fault. let the tears come. i'll sit in it with you. 🕯️`;
+
+    const sevenMinutesVideoUrl = "https://golden-dr4gon.github.io/Video/My_Last_7_Minutes_shorts_dudemovie_life_pradeepranganathan_mamithabaiju_tamilsong_ytshorts_1080P.mp4";
+    const sevenText = `⏳ my 7 minutes would be you. every second. every memory. you matter so much. 🕯️`;
+
+    const promiseText = `💎 i promise to stay. even when you push me away. even when you're too tired. you are never a burden. rest. i've got you. 🕯️`;
+
+    const dhooreAudioUrl = "https://golden-dr4gon.github.io/dhoore/dhoore.mp3";
+    
+    let modalNight, modalCommit, modalBroken, modalMelody, modalLetter, modalSad, modalSeven, modalPromise;
+    function buildModals() {
+        modalNight = createModal("🌙 when sleep won't come (3am thoughts)", nightText, "none", "");
+        modalCommit = createModal("📅 dec 26 — we promised to stay", commitText, "none", "");
+        modalBroken = createModal("🕯️ a letter from my broken heart", brokenHeartText, "none", "");
+        modalMelody = createModal("🎵 a song for heavy hearts", melodyText, "audio", dhooreAudioUrl);
+        modalLetter = createModal("💤 for when your body gives up", letterTiredText, "none", "");
+        modalSad = createModal("🌧️ when the darkness is loud", sadDaysText, "none", "");
+        modalSeven = createModal("⏳ my last 7 minutes — only you", sevenText, "video", sevenMinutesVideoUrl);
+        modalPromise = createModal("🤝 i'm not leaving. i promise.", promiseText, "none", "");
+        
+        document.getElementById('btnNightTalks').onclick = () => modalNight.classList.add('active');
+        document.getElementById('btnCommitDay').onclick = () => modalCommit.classList.add('active');
+        document.getElementById('btnBrokenHeart').onclick = () => modalBroken.classList.add('active');
+        document.getElementById('btnMelodyLove').onclick = () => modalMelody.classList.add('active');
+        document.getElementById('btnLetterTired').onclick = () => modalLetter.classList.add('active');
+        document.getElementById('btnSadDays').onclick = () => modalSad.classList.add('active');
+        document.getElementById('btnSevenMinutes').onclick = () => modalSeven.classList.add('active');
+        document.getElementById('btnPromiseEternal').onclick = () => modalPromise.classList.add('active');
+    }
+
+    window.addEventListener('load', () => {
+        document.getElementById('entryScreen').style.display = 'flex';
+        buildModals();
+        createFloatingLove();
+    });
+</script>
+</body>
+</html>
